@@ -25,7 +25,7 @@ export default function App() {
           <Route path="/reservas" element={<Reserva/>} />
           <Route path="/sobrenosotros" element={<SobreNosotros/>} />
           <Route path="/pagos" element={<Pagos/>} />
-          <Route path="/reservas" element={<consulta1/>} />
+          <Route path="/ver_reservas" element={<consulta1/>} />
           
            
         
