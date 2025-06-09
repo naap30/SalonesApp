@@ -58,7 +58,7 @@ export default function Register() {
         <input type="int"     placeholder="Salon"             className="form-input" value={id_salon}        onChange={(e) => setSalon(e.target.value)}         required />
         <label>ID de la Persona</label>
         <input type="int"     placeholder="Persona"           className="form-input" value={id_persona}      onChange={(e) => setPersona(e.target.value)}       required />
-        <label>Capacidad de Salón</label>
+        <label>Cantidad de Personas</label>
         <input type="int"      placeholder="Capacidad"               className="form-input" value={capacidad}           onChange={(e) => setCapacidad(e.target.value)}  required/> 
         <label>Fecha de Inicio</label>
         <input type="datetime-local"      placeholder="HoraInicio"        className="form-input" value={hora_inicio}           onChange={(e) => setHoraInicio(e.target.value)}  required/> 
