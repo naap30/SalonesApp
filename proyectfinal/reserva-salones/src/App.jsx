@@ -10,7 +10,7 @@ import Equipos from "./components/equipos.jsx"
 import Reserva from "./components/reserva.jsx"
 import SobreNosotros from "./components/sobrenosotros.jsx";
 import Pagos from "./components/pagos.jsx"
-
+import consulta1 from "./components/consultare.jsx"
 export default function App() {
   return (
     <>
@@ -25,6 +25,7 @@ export default function App() {
           <Route path="/reservas" element={<Reserva/>} />
           <Route path="/sobrenosotros" element={<SobreNosotros/>} />
           <Route path="/pagos" element={<Pagos/>} />
+          <Route path="/reservas" element={<consulta1/>} />
           
            
         

@@ -30,7 +30,7 @@ export default function Register() {
     };
 
 
-    const { error } = await supabase.from('reservas').insert([nuevaReserva]);
+    const { error } = await supabase.from('reservas').select();
    
     if (error) {
       console.error('Error al registrar:', error);
