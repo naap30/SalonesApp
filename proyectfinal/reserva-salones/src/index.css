@@ -1,0 +1,799 @@
+/* variables de color */
+:root {
+  --azul-principal: #1e40af;
+  --azul-secundario: #3b82f6;
+  --azul-hover: #2563eb;
+  --azul-fondo: #eff6ff;
+  --gris-claro: #f3f4f6;
+  --gris-medio: #6b7280;
+  --gris-oscuro: #374151;
+  --blanco: #fff;
+}
+
+/* Reset y base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--gris-oscuro);
+  scroll-behavior: smooth;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+body {
+  background: var(--azul-fondo);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Contenedor centrado con sombra animada */
+.container,
+.login-page,
+.register-container,
+.login-box,
+.register-form {
+  max-width: 600px;
+  margin: 40px auto;
+  background: var(--blanco);
+  padding: 35px 30px;
+  border-radius: 12px;
+  box-shadow:
+    0 4px 15px rgba(30, 64, 175, 0.2),
+    0 0 8px rgba(59, 130, 246, 0.1);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Animación para fadeIn y subida suave */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Títulos con animación */
+h1, h2 {
+  color: var(--azul-principal);
+  margin-bottom: 25px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 1.1px;
+  animation: slideInDown 0.5s ease forwards;
+}
+
+@keyframes slideInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Formularios flex y espaciado */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Labels dinámicos */
+label {
+  font-weight: 600;
+  color: var(--azul-principal);
+  letter-spacing: 0.05em;
+  font-size: 0.9rem;
+  user-select: none;
+}
+
+/* Inputs con sombra y animación focus */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+select,
+textarea {
+  padding: 14px 18px;
+  border: 2px solid var(--gris-claro);
+  border-radius: 10px;
+  font-size: 16px;
+  box-shadow: inset 0 0 5px #d1d5db;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.4s ease;
+  outline-offset: 3px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--azul-secundario);
+  box-shadow:
+    0 0 10px var(--azul-secundario),
+    inset 0 0 6px var(--azul-secundario);
+  outline: none;
+}
+
+/* Botones con efecto pulsante */
+button,
+.form-button,
+.login-register-btn {
+  background: var(--azul-secundario);
+  color: var(--blanco);
+  border: none;
+  padding: 14px 0;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow:
+    0 8px 15px rgba(59, 130, 246, 0.3);
+  transition:
+    background-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.2s ease;
+  width: 100%;
+  user-select: none;
+}
+
+button:hover,
+.form-button:hover,
+.login-register-btn:hover {
+  background-color: var(--azul-hover);
+  box-shadow:
+    0 12px 20px rgba(37, 99, 235, 0.5);
+  transform: translateY(-2px);
+}
+
+button:active,
+.form-button:active,
+.login-register-btn:active {
+  transform: translateY(0);
+  box-shadow:
+    0 5px 10px rgba(37, 99, 235, 0.4);
+}
+
+/* Tablas animadas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  font-size: 14px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.12);
+  animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+th, td {
+  border-bottom: 1px solid var(--gris-claro);
+  padding: 14px 16px;
+  text-align: left;
+}
+
+th {
+  background-color: var(--azul-principal);
+  color: var(--blanco);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--gris-claro);
+  transition: background-color 0.3s ease;
+}
+
+tbody tr:hover {
+  background-color: var(--azul-fondo);
+  cursor: pointer;
+  transform: scale(1.02);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Navbar con sombra y animación */
+.navbar-header {
+  background-color: var(--azul-principal);
+  padding: 14px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow:
+    0 6px 18px rgba(30, 64, 175, 0.5);
+  animation: slideDownFade 0.5s ease forwards;
+}
+
+@keyframes slideDownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  color: var(--blanco);
+  font-weight: 800;
+  font-size: 1.9rem;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  user-select: none;
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  color: var(--blanco);
+  cursor: pointer;
+  display: none;
+  transition: color 0.3s ease;
+}
+
+.menu-button:hover {
+  color: var(--azul-hover);
+}
+
+/* Navbar links dinámicos */
+.navbar-links {
+  display: flex;
+  gap: 22px;
+  transition: all 0.35s ease;
+}
+
+.navbar-links.show {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--azul-principal);
+  position: absolute;
+  top: 60px;
+  right: 24px;
+  border-radius: 10px;
+  width: 220px;
+  padding: 15px 0;
+  box-shadow: 0 6px 15px rgba(30, 64, 175, 0.3);
+}
+
+.nav-link {
+  color: var(--blanco);
+  text-decoration: none;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 8px;
+  letter-spacing: 0.05em;
+  user-select: none;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background-color: var(--azul-hover);
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .menu-button {
+    display: block;
+  }
+
+  .navbar-links {
+    display: none;
+  }
+
+  .navbar-links.show {
+    display: flex;
+  }
+}
+
+/* Toasts estilo simple */
+.toast {
+  border-radius: 10px;
+  padding: 15px 20px;
+  font-weight: 600;
+  color: var(--blanco);
+  animation: slideInRight 0.5s ease forwards;
+  user-select: none;
+}
+
+.toast-error {
+  background-color: #dc2626;
+  box-shadow: 0 4px 10px rgba(220, 38, 38, 0.6);
+}
+
+.toast-success {
+  background-color: var(--azul-hover);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.7);
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Utilidades */
+.text-center {
+  text-align: center;
+}
+
+.mb-4 {
+  margin-bottom: 1.25rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*NAVBAR GENERAL */
+/* .navbar-header {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e0e0e0;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+} */
+
+/* CONTENEDOR CENTRAL */
+/* .navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  padding: 1rem;
+  margin: 0 auto;
+} */
+
+/* LOGO */
+/* .navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1a1a1a;
+  text-decoration: none;
+} */
+
+/* BOTÓN MENÚ PARA MÓVILES */
+/* .menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: block;
+} */
+
+/* NAVBAR LINKS */
+/* .navbar-links {
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  background-color: white;
+  position: absolute;
+  top: 100%;
+  right: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+} */
+
+/* MOSTRAR MENÚ EN MÓVIL CUANDO ESTÁ ABIERTO */
+/* .navbar-links.show {
+  display: flex;
+} */
+
+/* LINK INDIVIDUAL */
+/* .nav-link {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: backround 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: #f5f5f5;
+} */
+
+/* Asegúrate de importar este archivo en tu componente o globalmente */
+
+/* === Estilos para el login === */
+/* .login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: linear-gradient(to right, #dbeafe, #ede9fe);
+}
+
+.login-box {
+  background: #ffffff;
+  padding: 40px 32px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  width: 100%;
+  max-width: 420px;
+  animation: loginFadeIn 0.6s ease;
+}
+
+.login-form h2 {
+  text-align: center;
+  font-size: 1.75rem;
+  margin-bottom: 26px;
+  color: #333;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.login-form input:focus {
+  border-color: #6d28d9;
+  outline: none;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 14px;
+  background-color: #6d28d9;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+  background-color: #5b21b6;
+} */
+
+/* Pie con enlace a registro */
+/* .login-footer {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.login-footer p {
+  margin-bottom: 6px;
+  color: #444;
+}
+
+.login-footer .login-register-btn {
+  background: none;
+  border: none;
+  color: #6d28d9;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.login-footer .login-register-btn:hover {
+  color: #5b21b6;
+} */
+
+/* Animación de aparición */
+/* @keyframes loginFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} */
+
+/* --- Fin de estilos para el login --- */
+
+
+
+/* VISTA EN ESCRITORIO */
+/* @media (min-width: 768px) {
+  .menu-button {
+    display: none;
+  }
+
+  .navbar-links {
+    display: flex !important;
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+} */
+
+
+
+
+
+
+
+
+
+/* === Estilos para el registro === */
+/* .register-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f3f4f6;
+}
+
+.register-form {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+}
+
+.register-title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  border-color: #4CAF50;
+  outline: none;
+}
+
+.form-button {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-button:hover {
+  background-color: #45a049;
+} */
+/* 
+.form-reserva {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 24px;
+  background-color: #f9fafb;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.form-reserva label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  color: #374151;
+  gap: 8px;
+}
+
+.form-reserva input {
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+} */
+/* 
+.form-reserva input:focus {
+  border-color: #3b82f6;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+}
+
+.form-reserva button {
+  padding: 12px;
+  background-color: #3b82f6;
+  color: #ffffff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.form-reserva button:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.form-reserva button:hover:not(:disabled) {
+  background-color: #2563eb;
+}
+ */
+
+
+
+/* RESERVAS CSS/
+
+
+
+
+
+
+
+/* Contenedor general del formulario */
+/* .form-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 12px;
+  background-color: #f8f8f8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+} */
+
+/* Etiquetas que envuelven cada input */
+/* .form-label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  color: #333;
+} */
+
+/* Estilo base para todos los inputs */
+/* .form-input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 0.3rem;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+} */
+
+/* Botón principal */
+/* .form-button {
+  padding: 0.75rem;
+  font-size: 1rem;
+  background-color: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-button:hover {
+  background-color: #357abd;
+}
+
+.form-button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+} */
+
+/* PAGOS
+
+
+
+
+
+
+
+
+
+
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+
