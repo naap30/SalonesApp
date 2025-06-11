@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
-import { Menu } from "lucide-react";
+import { Menu, Navigation } from "lucide-react";
 import { useState } from "react";
+
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -30,6 +31,10 @@ export default function Navbar() {
           <NavLink to="/pagos" className="nav-link">
             Pagos
           </NavLink>
+          <NavLink to="/consultas" className="nav-link">
+           Consultas
+          </NavLink> 
+        
            <NavLink to="/login" className="nav-link">
           Iniciar Sesión
           </NavLink>

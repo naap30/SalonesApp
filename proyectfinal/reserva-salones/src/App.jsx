@@ -10,7 +10,13 @@ import Equipos from "./components/equipos.jsx"
 import Reserva from "./components/reserva.jsx"
 import SobreNosotros from "./components/sobrenosotros.jsx";
 import Pagos from "./components/pagos.jsx"
-import consulta1 from "./components/consultare.jsx"
+import Consulta1 from "./components/ConsultaP.jsx"
+import Consulta2 from "./components/ConsultaE.jsx"
+import Consulta3 from "./components/ConsultaS.jsx"
+import Consulta4 from "./components/ConsultaR.jsx"
+ import Consulta5 from "./components/ConsultaPG.jsx"
+import MiniMenu from "./components/Minimenu.jsx";
+
 export default function App() {
   return (
     <>
@@ -25,8 +31,12 @@ export default function App() {
           <Route path="/reservas" element={<Reserva/>} />
           <Route path="/sobrenosotros" element={<SobreNosotros/>} />
           <Route path="/pagos" element={<Pagos/>} />
-          <Route path="/ver_reservas" element={<consulta1/>} />
-          
+          <Route path="/ver_personas" element={<Consulta1/>} />
+          <Route path="/consulta2" element={<Consulta2/>} />
+          <Route path="consulta3" element={<Consulta3/>} />
+          <Route path="/consulta4" element={<Consulta4/>} />
+          <Route path="/consulta5" element={<Consulta5/>} />
+          <Route path="/consultas" element={<MiniMenu/>} />   
            
         
       

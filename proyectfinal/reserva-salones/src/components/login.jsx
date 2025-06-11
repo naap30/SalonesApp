@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { supabase } from '../supabaseClient'   
+import { useNavigate } from 'react-router-dom';
+
 
 
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -26,7 +29,8 @@ export default function Login() {
       return
     }
 
-    toast.success(`Bienvenido, ${usuario.nombre}`)
+    toast.success(`Bienvenido, ${usuario.nombre}`);
+    navigate('/sobrenosotros');
   }
 
   return (

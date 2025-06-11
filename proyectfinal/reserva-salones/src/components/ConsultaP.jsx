@@ -1,17 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { supabase } from '../supabaseClient';   //import base de datos
 
 
 export default function Register() {
   const [personas, setPersonas] = useState([]);
-  useEffect(() => {
-    getPersonas();
-  }, []);
+
   async function getPersonas() {
     const { data } = await supabase.from("personas").select();
     setPersonas(data);
   }
+
+    useEffect(() => {
+    getPersonas();
+  }, []);
+  
   return (
     <>
   
@@ -25,6 +28,7 @@ export default function Register() {
             <th className="px-4 py-2 border-b">Nombre</th>
             <th className="px-4 py-2 border-b">Apellido</th>
             <th className="px-4 py-2 border-b">Correo</th>
+            <th className="px-4 py-2 border-b">Dirección</th>
           </tr>
         </thead>
         <tbody>
@@ -37,6 +41,7 @@ export default function Register() {
               <td className="px-4 py-2 border-b">{personas.nombre}</td>
               <td className="px-4 py-2 border-b">{personas.apellido}</td>
               <td className="px-4 py-2 border-b">{personas.correo}</td>
+              <td className="px-4 py-2 border-b">{personas.direccion}</td>
             </tr>
           ))}
         </tbody>

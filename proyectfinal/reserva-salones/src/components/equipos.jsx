@@ -52,7 +52,7 @@ export default function Register() {
     <div className="register-container">
       <form onSubmit={handleRegister} className="register-form">
         <h2 className="register-title">Registrar Nuevo Equipo</h2>
-        <label>Nombre del Salón</label>
+        <label>Nombre del Equipo</label>
         <input type="text"     placeholder="Nombre"             className="form-input" value={nombre}        onChange={(e) => setNombre(e.target.value)}         required />
         <label>Cantidad</label>
         <input type="int"     placeholder="Cantidad"           className="form-input" value={cantidad}      onChange={(e) => setCantidad(e.target.value)}       required />
