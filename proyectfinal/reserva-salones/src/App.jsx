@@ -14,8 +14,9 @@ import Consulta1 from "./components/ConsultaP.jsx"
 import Consulta2 from "./components/ConsultaE.jsx"
 import Consulta3 from "./components/ConsultaS.jsx"
 import Consulta4 from "./components/ConsultaR.jsx"
- import Consulta5 from "./components/ConsultaPG.jsx"
+import Consulta5 from "./components/ConsultaPG.jsx"
 import MiniMenu from "./components/Minimenu.jsx";
+ import AsignacionE from "./components/EquiposAsignacion.jsx";
 
 export default function App() {
   return (
@@ -36,7 +37,11 @@ export default function App() {
           <Route path="consulta3" element={<Consulta3/>} />
           <Route path="/consulta4" element={<Consulta4/>} />
           <Route path="/consulta5" element={<Consulta5/>} />
+           
           <Route path="/consultas" element={<MiniMenu/>} />   
+          <Route path="/asignar" element={<AsignacionE/>} />
+
+          {/* Redirección a la página de salones por defecto */}
            
         
       

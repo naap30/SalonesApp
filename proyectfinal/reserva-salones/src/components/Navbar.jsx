@@ -28,13 +28,17 @@ export default function Navbar() {
           <NavLink to="/equipos" className="nav-link">
             Equipos
           </NavLink>
+          <NavLink to="/asignar" className="nav-link">
+          Asignar Equipos
+          </NavLink>
           <NavLink to="/pagos" className="nav-link">
             Pagos
           </NavLink>
           <NavLink to="/consultas" className="nav-link">
            Consultas
           </NavLink> 
-        
+       
+
            <NavLink to="/login" className="nav-link">
           Iniciar Sesión
           </NavLink>

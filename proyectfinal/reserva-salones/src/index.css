@@ -364,6 +364,45 @@ tbody tr:hover {
 }
 
 
+.sidebar {
+  width: 12rem;
+  background-color: #e5e7eb;
+  height: 45vh;
+  padding: 1rem;
+  text-align: center; /* Centra todo el texto */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar h2 {
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.sidebar nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.sidebar nav ul li a {
+  display: block;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  text-decoration: none;
+  color: #1f2937;
+  transition: background-color 0.2s ease-in-out;
+  text-align: center;
+}
+
+.sidebar nav ul li a:hover {
+  background-color: #d1d5db;
+}
 
 
 
