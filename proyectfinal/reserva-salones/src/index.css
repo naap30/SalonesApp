@@ -33,7 +33,7 @@ body {
 .register-container,
 .login-box,
 .register-form {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 40px auto;
   background: var(--blanco);
   padding: 35px 30px;

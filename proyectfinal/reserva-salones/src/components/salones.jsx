@@ -17,6 +17,16 @@ export default function Register() {
         "Aula de Informática",
         "Oficina de Videollamadas",
         "Aula Virtual",
+        "Sala de Reuniones",
+        "Sala de Estudio",
+        "Sala de Proyectos",
+        "Sala de Capacitación",
+        "Sala de Innovación",
+        "Sala de Colaboración",
+        "Sala de Creatividad",
+        "Sala de Aprendizaje",
+        "Salon de Eventos Especiales",
+        "Salon de Reuniones Ejecutivas",
         
     ];
     const onOptionChangeHandler = (event) => {

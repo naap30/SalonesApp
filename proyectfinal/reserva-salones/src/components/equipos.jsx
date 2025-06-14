@@ -43,6 +43,7 @@ export default function Register() {
     // Limpiar campos
     setNombre('');
     setCantidad('');
+    setStock_disponible('');
     setMarca('');
     setModelo('');
     setUbicacion('');

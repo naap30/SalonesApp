@@ -9,13 +9,14 @@ export default function FormAsignacionEquipos() {
   const [cantidadAsignada, setCantidadAsignada] = useState('');
   const [estado, setEstado] = useState('activo');
   const [stockDisponible, setStockDisponible] = useState(null);
+  const [errorCantidad, setErrorCantidad] = useState('');
 
-  //  Cargar los equipos y salones al iniciar
+  // Cargar los equipos y salones al iniciar
   useEffect(() => {
     async function fetchData() {
       const { data: equiposData, error: equiposError } = await supabase
         .from('equipos')
-        .select('id_equipo, nombre, stock_disponible'); // <-- nos aseguramos de traer stock_disponible
+        .select('id_equipo, nombre, stock_disponible');
 
       const { data: salonesData, error: salonesError } = await supabase
         .from('salones')
@@ -37,7 +38,7 @@ export default function FormAsignacionEquipos() {
     fetchData();
   }, []);
 
-  //  Cuando el usuario seleccione un equipo, mostramos su stock disponible
+  // Cuando el usuario seleccione un equipo, mostramos su stock disponible
   useEffect(() => {
     if (!idEquipo) {
       setStockDisponible(null);
@@ -48,7 +49,6 @@ export default function FormAsignacionEquipos() {
       (eq) => eq.id_equipo === Number(idEquipo)
     );
 
-    // Aquí corregimos para que use stock_disponible
     setStockDisponible(
       equipoSeleccionado && equipoSeleccionado.stock_disponible !== null
         ? equipoSeleccionado.stock_disponible
@@ -56,7 +56,17 @@ export default function FormAsignacionEquipos() {
     );
   }, [idEquipo, equipos]);
 
-  //  Función que se ejecuta al enviar el formulario
+  // Validación en tiempo real de cantidad
+  useEffect(() => {
+    const cantidadNum = parseInt(cantidadAsignada);
+    if (cantidadNum > stockDisponible) {
+      setErrorCantidad(`No puedes asignar más de ${stockDisponible} unidades.`);
+    } else {
+      setErrorCantidad('');
+    }
+  }, [cantidadAsignada, stockDisponible]);
+
+  // Función que se ejecuta al enviar el formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -67,15 +77,18 @@ export default function FormAsignacionEquipos() {
 
     const cantidadNum = parseInt(cantidadAsignada);
 
-    if (cantidadNum <= 0) {
+    if (isNaN(cantidadNum) || cantidadNum <= 0) {
       alert('La cantidad asignada debe ser mayor que cero.');
       return;
     }
 
-    // Bajamos el stock sin validarlo (ya no comparamos con el máximo)
+    if (cantidadNum > stockDisponible) {
+      alert(`No puedes asignar más de ${stockDisponible} unidades disponibles.`);
+      return;
+    }
+
     const nuevoStock = stockDisponible - cantidadNum;
 
-    // Actualizar el stock en la base de datos
     const { error: updateError } = await supabase
       .from('equipos')
       .update({ stock_disponible: nuevoStock })
@@ -86,7 +99,6 @@ export default function FormAsignacionEquipos() {
       return;
     }
 
-    //  Insertar la asignación en la tabla asignacion_equipos
     const { error: insertError } = await supabase.from('asignacion_equipos').insert({
       id_equipo: Number(idEquipo),
       id_salon: Number(idSalon),
@@ -101,12 +113,13 @@ export default function FormAsignacionEquipos() {
 
     alert('¡Asignación registrada correctamente!');
 
-    //  Limpiar formulario
+    // Limpiar formulario
     setIdEquipo('');
     setIdSalon('');
     setCantidadAsignada('');
     setEstado('activo');
     setStockDisponible(null);
+    setErrorCantidad('');
   };
 
   return (
@@ -153,8 +166,11 @@ export default function FormAsignacionEquipos() {
         onChange={(e) => setCantidadAsignada(e.target.value)}
         min="1"
         required
-        className="w-full p-2 border mb-4 rounded"
+        className="w-full p-2 border mb-1 rounded"
       />
+      {errorCantidad && (
+        <p className="text-red-600 text-sm mb-2">{errorCantidad}</p>
+      )}
 
       {/* Estado */}
       <label className="block mb-2">Estado:</label>
@@ -166,12 +182,232 @@ export default function FormAsignacionEquipos() {
         <option value="activo">Activo</option>
       </select>
 
-      <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">
+      <button
+        type="submit"
+        className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 disabled:bg-gray-400"
+        disabled={!!errorCantidad}
+      >
         Asignar
       </button>
     </form>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { useEffect, useState } from 'react';
+// import { supabase } from '../supabaseClient';
+
+// export default function FormAsignacionEquipos() {
+//   const [equipos, setEquipos] = useState([]);
+//   const [salones, setSalones] = useState([]);
+//   const [idEquipo, setIdEquipo] = useState('');
+//   const [idSalon, setIdSalon] = useState('');
+//   const [cantidadAsignada, setCantidadAsignada] = useState('');
+//   const [estado, setEstado] = useState('activo');
+//   const [stockDisponible, setStockDisponible] = useState(null);
+
+//   //  Cargar los equipos y salones al iniciar
+//   useEffect(() => {
+//     async function fetchData() {
+//       const { data: equiposData, error: equiposError } = await supabase
+//         .from('equipos')
+//         .select('id_equipo, nombre, stock_disponible'); // <-- nos aseguramos de traer stock_disponible
+
+//       const { data: salonesData, error: salonesError } = await supabase
+//         .from('salones')
+//         .select('id_salon, nombre');
+
+//       if (equiposError) {
+//         alert('Error cargando equipos: ' + equiposError.message);
+//         return;
+//       }
+//       if (salonesError) {
+//         alert('Error cargando salones: ' + salonesError.message);
+//         return;
+//       }
+
+//       setEquipos(equiposData || []);
+//       setSalones(salonesData || []);
+//     }
+
+//     fetchData();
+//   }, []);
+
+//   //  Cuando el usuario seleccione un equipo, mostramos su stock disponible
+//   useEffect(() => {
+//     if (!idEquipo) {
+//       setStockDisponible(null);
+//       return;
+//     }
+
+//     const equipoSeleccionado = equipos.find(
+//       (eq) => eq.id_equipo === Number(idEquipo)
+//     );
+
+//     // Aquí corregimos para que use stock_disponible
+//     setStockDisponible(
+//       equipoSeleccionado && equipoSeleccionado.stock_disponible !== null
+//         ? equipoSeleccionado.stock_disponible
+//         : 0
+//     );
+//   }, [idEquipo, equipos]);
+
+//   //  Función que se ejecuta al enviar el formulario
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     if (stockDisponible === null) {
+//       alert('Selecciona un equipo válido.');
+//       return;
+//     }
+
+//     const cantidadNum = parseInt(cantidadAsignada);
+
+//     if (cantidadNum <= 0) {
+//       alert('La cantidad asignada debe ser mayor que cero.');
+//       return;
+//     }
+
+//     // Bajamos el stock sin validarlo (ya no comparamos con el máximo)
+//     const nuevoStock = stockDisponible - cantidadNum;
+
+//     // Actualizar el stock en la base de datos
+//     const { error: updateError } = await supabase
+//       .from('equipos')
+//       .update({ stock_disponible: nuevoStock })
+//       .eq('id_equipo', Number(idEquipo));
+
+//     if (updateError) {
+//       alert('Error al actualizar el stock: ' + updateError.message);
+//       return;
+//     }
+
+//     //  Insertar la asignación en la tabla asignacion_equipos
+//     const { error: insertError } = await supabase.from('asignacion_equipos').insert({
+//       id_equipo: Number(idEquipo),
+//       id_salon: Number(idSalon),
+//       cantidad_asignada: cantidadNum,
+//       estado,
+//     });
+
+//     if (insertError) {
+//       alert('Error al guardar la asignación: ' + insertError.message);
+//       return;
+//     }
+
+//     alert('¡Asignación registrada correctamente!');
+
+//     //  Limpiar formulario
+//     setIdEquipo('');
+//     setIdSalon('');
+//     setCantidadAsignada('');
+//     setEstado('activo');
+//     setStockDisponible(null);
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white rounded shadow">
+//       <h2 className="text-xl font-bold mb-4 text-center">Asignar Equipos</h2>
+
+//       {/* Selector de Equipo */}
+//       <label className="block mb-2">Equipo:</label>
+//       <select
+//         value={idEquipo}
+//         onChange={(e) => setIdEquipo(e.target.value)}
+//         required
+//         className="w-full p-2 border mb-4 rounded"
+//       >
+//         <option value="">Seleccione un equipo</option>
+//         {equipos.map((equipo) => (
+//           <option key={equipo.id_equipo} value={equipo.id_equipo}>
+//             {equipo.nombre} (Stock: {equipo.stock_disponible})
+//           </option>
+//         ))}
+//       </select>
+
+//       {/* Selector de Salón */}
+//       <label className="block mb-2">Salón:</label>
+//       <select
+//         value={idSalon}
+//         onChange={(e) => setIdSalon(e.target.value)}
+//         required
+//         className="w-full p-2 border mb-4 rounded"
+//       >
+//         <option value="">Seleccione un salón</option>
+//         {salones.map((salon) => (
+//           <option key={salon.id_salon} value={salon.id_salon}>
+//             {salon.nombre}
+//           </option>
+//         ))}
+//       </select>
+
+//       {/* Cantidad */}
+//       <label className="block mb-2">Cantidad Asignada:</label>
+//       <input
+//         type="number"
+//         value={cantidadAsignada}
+//         onChange={(e) => setCantidadAsignada(e.target.value)}
+//         min="1"
+//         required
+//         className="w-full p-2 border mb-4 rounded"
+//       />
+
+//       {/* Estado */}
+//       <label className="block mb-2">Estado:</label>
+//       <select
+//         value={estado}
+//         onChange={(e) => setEstado(e.target.value)}
+//         className="w-full p-2 border mb-4 rounded"
+//       >
+//         <option value="activo">Activo</option>
+//       </select>
+
+//       <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">
+//         Asignar
+//       </button>
+//     </form>
+//   );
+// }
 
 
 
